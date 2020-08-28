@@ -224,11 +224,9 @@ router.post('/reservationquerry', async (req, res) => {
       if(cloth.status==2){
         await Branch.find({},async function (err, br) {
           br.map(b=>{
-            if(b._id==cloth.shopId)
-            address=b.address;
-          })
-        });
-        //checking the user's relation to cloth
+            if(b._id==cloth.shopId){
+              address=b.address;
+        //checking the user's relation to the cloth
         const bearerHeader = req.headers['token'];
         
         if (typeof bearerHeader !== 'undefined') {
@@ -266,6 +264,10 @@ router.post('/reservationquerry', async (req, res) => {
         });
         
         }
+            }
+            
+          })
+        });
       }
       else
       res.json({response:3});
